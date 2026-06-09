@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/xterm.css" />
+    <link rel="stylesheet" href="/assets/base.css" />
+    <title>Terminal Panel</title>
+  </head>
+  <body>
+    <main class="panel-root terminal-frame terminal-shell">
+      <aside id="tmux-pinned-root" class="tmux-pinned" hidden></aside>
+      <section class="terminal-pane">
+        <div id="terminal"></div>
+      </section>
+    </main>
+    <script src="/assets/xterm.js"></script>
+    <script src="/assets/xterm-addon-fit.js"></script>
+    <script src="/assets/tmux-actions.js?v=tmux-state-25"></script>
+    <script src="/assets/tmux-controller.js?v=tmux-state-25"></script>
+    <script src="/assets/tmux-manager.js?v=tmux-state-25"></script>
+    <script src="/assets/terminal.js?v=terminal-scroll-fix-1"></script>
+  </body>
+</html>

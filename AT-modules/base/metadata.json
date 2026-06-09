@@ -1,0 +1,98 @@
+{
+  "module_name": "base",
+  "panel_types": ["empty", "terminal", "monaco", "browser_preview"],
+  "panel_display_names": {
+    "monaco": "Editor"
+  },
+  "panel_colors": {
+    "terminal": "#39ff14",
+    "monaco": "#ffb000",
+    "browser_preview": "#00d4ff"
+  },
+  "startup_script_location": "scripts/start.sh",
+  "startup_script_command": "cargo run --manifest-path server/Cargo.toml --quiet",
+  "panel_url_template": "http://127.0.0.1:47831/panels/{panel_type}",
+  "healthcheck_url": "http://127.0.0.1:47831/health",
+  "validation_urls": [
+    "/panels/tmux-manager",
+    "/api/base/version?expectedVersion=tmux-state-25",
+    "/api/tmux/state?panelId=validation"
+  ],
+  "panel_tool_bar": {
+    "terminal": {
+      "items": [
+        {
+          "id": "tmux",
+          "text": "TMUX",
+          "tooltip": "Start tmux in this terminal",
+          "command": "tmux"
+        },
+        {
+          "id": "tmux-manager",
+          "text": "Manage",
+          "tooltip": "Open tmux manager",
+          "command": "tmux:manager",
+          "visible": false
+        },
+        {
+          "id": "tmux-new-window",
+          "text": "",
+          "icon_path": "/assets/tmux-window-new.svg",
+          "tooltip": "Create a new tmux window",
+          "command": "tmux:new-window",
+          "visible": false
+        },
+        {
+          "id": "tmux-prev-window",
+          "text": "",
+          "icon_path": "/assets/tmux-window-prev.svg",
+          "tooltip": "Go to the previous tmux window",
+          "command": "tmux:prev-window",
+          "visible": false
+        },
+        {
+          "id": "tmux-next-window",
+          "text": "",
+          "icon_path": "/assets/tmux-window-next.svg",
+          "tooltip": "Go to the next tmux window",
+          "command": "tmux:next-window",
+          "visible": false
+        },
+        {
+          "id": "tmux-split-vertical",
+          "text": "",
+          "icon_path": "/assets/tmux-split-vertical.svg",
+          "tooltip": "Split the current tmux pane vertically",
+          "command": "tmux:split-vertical",
+          "visible": false
+        },
+        {
+          "id": "tmux-split-horizontal",
+          "text": "",
+          "icon_path": "/assets/tmux-split-horizontal.svg",
+          "tooltip": "Split the current tmux pane horizontally",
+          "command": "tmux:split-horizontal",
+          "visible": false
+        },
+        {
+          "id": "tmux-pin-panel",
+          "kind": "toggle",
+          "text": "",
+          "icon_path": "/assets/tmux-pin-panel.svg",
+          "tooltip": "Pin tmux manager to this panel",
+          "command": "tmux:pin-panel",
+          "visible": false
+        },
+        {
+          "id": "tmux-mouse-on",
+          "kind": "toggle",
+          "text": "",
+          "icon_path": "/assets/tmux-mouse-on.svg",
+          "tooltip": "Run tmux set-option -g mouse on",
+          "command": "tmux:mouse-on",
+          "visible": false
+        }
+      ]
+    }
+  }
+}

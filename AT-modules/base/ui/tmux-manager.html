@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/base.css" />
+    <title>Tmux Manager</title>
+  </head>
+  <body>
+    <main class="panel-root tmux-manager">
+      <header class="tmux-manager-topbar">
+        <div class="tmux-manager-brand">
+          <h1>Tmux</h1>
+          <p id="tree-summary" class="tmux-manager-subtitle">Loading sessions...</p>
+        </div>
+        <span id="status-chip" class="tmux-status-chip">Loading</span>
+        <div class="tmux-manager-controls">
+          <label class="tmux-manager-search">
+            <span>Search</span>
+            <input id="filter-input" type="search" placeholder="Search sessions, windows, panes" />
+          </label>
+          <div id="global-actions" class="tmux-action-grid tmux-global-actions"></div>
+          <button id="refresh-button" class="tmux-button tmux-button-secondary" type="button">
+            Refresh
+          </button>
+          <button id="pin-button" class="tmux-button tmux-button-secondary" type="button">
+            Pin to Panel
+          </button>
+          <button id="close-button" class="tmux-button tmux-button-ghost" type="button">
+            Close
+          </button>
+        </div>
+      </header>
+
+      <section class="tmux-manager-body">
+        <aside class="tmux-sidebar">
+          <div class="tmux-sidebar-header">
+            <div>
+              <p class="tmux-sidebar-title">Sessions</p>
+            </div>
+          </div>
+          <div id="tree-root" class="tmux-tree" aria-live="polite"></div>
+        </aside>
+
+        <section class="tmux-main">
+          <section class="tmux-panel tmux-selection-panel">
+            <div class="tmux-panel-heading">
+              <div>
+                <p class="tmux-panel-eyebrow">Selection</p>
+                <h2 id="selection-title">Loading...</h2>
+              </div>
+              <span id="selection-badge" class="tmux-selection-badge">tmux</span>
+            </div>
+
+            <div id="selection-actions" class="tmux-action-grid tmux-selection-actions"></div>
+            <div id="selection-meta" class="tmux-meta-list"></div>
+          </section>
+
+          <section class="tmux-panel tmux-command-panel">
+            <div class="tmux-panel-heading tmux-command-heading">
+              <div>
+                <p class="tmux-panel-eyebrow">Command</p>
+                <h2>Tmux Command</h2>
+              </div>
+              <p class="tmux-command-help">
+                Enter a raw tmux subcommand. The server will run it as <code>tmux ...</code>.
+              </p>
+            </div>
+            <form id="command-form" class="tmux-command-form">
+              <input
+                id="command-input"
+                type="text"
+                placeholder="Example: set-option -g mouse on"
+                spellcheck="false"
+              />
+              <button class="tmux-button tmux-button-primary" type="submit">Run</button>
+            </form>
+          </section>
+
+          <section id="activity-panel" class="tmux-panel tmux-activity-panel">
+            <div class="tmux-panel-heading">
+              <div>
+                <p class="tmux-panel-eyebrow">Log</p>
+                <h2>Activity</h2>
+              </div>
+            </div>
+            <pre id="activity-log" class="tmux-activity-log">Waiting for tmux state...</pre>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <div id="dialog-root"></div>
+
+    <script src="/assets/tmux-actions.js?v=tmux-state-25"></script>
+    <script src="/assets/tmux-manager.js?v=tmux-state-25"></script>
+  </body>
+</html>

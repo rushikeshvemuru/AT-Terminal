@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/base.css" />
+    <title>Base Module Popup</title>
+  </head>
+  <body>
+    <main id="popup-root" class="panel-root popup-demo">
+      <section class="popup-demo-card">
+        <h2>Popup Route</h2>
+        <h1>Base module popup content</h1>
+        <p>
+          This iframe is served by the module itself and mounted inside the host-managed popup
+          shell. The host only passes <code>popupId</code> and the popup route keeps module content
+          on the same origin.
+        </p>
+      </section>
+
+      <section class="popup-demo-card">
+        <h2>Lifecycle</h2>
+        <p id="popup-id">Popup id: unknown</p>
+        <div class="popup-demo-actions">
+          <button id="close-button" class="primary" type="button">Close popup</button>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const popupId = params.get("popupId");
+      const popupKind = params.get("popupKind");
+
+      function closePopup() {
+        window.parent.postMessage(
+          {
+            type: "at.panelPopup.close",
+            popupId,
+          },
+          "*",
+        );
+      }
+
+      function renderDefaultPopup() {
+        const popupIdText = document.getElementById("popup-id");
+        const closeButton = document.getElementById("close-button");
+
+        if (popupIdText) {
+          popupIdText.textContent = `Popup id: ${popupId || "missing"}`;
+        }
+
+        if (closeButton) {
+          closeButton.addEventListener("click", closePopup);
+        }
+      }
+
+      function renderTmuxManagerShell() {
+        document.title = "Tmux Manager";
+        document.body.innerHTML = `
+          <main class="panel-root tmux-manager">
+            <header class="tmux-manager-topbar">
+              <div class="tmux-manager-brand">
+                <p class="tmux-manager-eyebrow">Base Module</p>
+                <h1>Tmux Manager</h1>
+                <p class="tmux-manager-subtitle">Fast tmux control for sessions, windows, and panes.</p>
+              </div>
+              <div class="tmux-manager-controls">
+                <label class="tmux-manager-search">
+                  <span>Filter</span>
+                  <input id="filter-input" type="search" placeholder="Search sessions, windows, panes" />
+                </label>
+                <button id="refresh-button" class="tmux-button tmux-button-secondary" type="button">Refresh</button>
+                <button id="close-button" class="tmux-button tmux-button-ghost" type="button">Close</button>
+              </div>
+            </header>
+            <section class="tmux-manager-body">
+              <aside class="tmux-sidebar">
+                <div class="tmux-sidebar-header">
+                  <div>
+                    <p class="tmux-sidebar-title">Tmux Tree</p>
+                    <p id="tree-summary" class="tmux-sidebar-meta">Loading sessions...</p>
+                  </div>
+                  <span id="status-chip" class="tmux-status-chip">Loading</span>
+                </div>
+                <div id="tree-root" class="tmux-tree" aria-live="polite"></div>
+              </aside>
+              <section class="tmux-main">
+                <div class="tmux-main-grid">
+                  <section class="tmux-panel">
+                    <div class="tmux-panel-heading">
+                      <div>
+                        <p class="tmux-panel-eyebrow">Selection</p>
+                        <h2 id="selection-title">Loading...</h2>
+                      </div>
+                      <span id="selection-badge" class="tmux-selection-badge">tmux</span>
+                    </div>
+                    <div id="selection-meta" class="tmux-meta-list"></div>
+                  </section>
+                  <section class="tmux-panel">
+                    <div class="tmux-panel-heading">
+                      <div>
+                        <p class="tmux-panel-eyebrow">Quick Actions</p>
+                        <h2>Common moves</h2>
+                      </div>
+                    </div>
+                    <div id="selection-actions" class="tmux-action-grid"></div>
+                  </section>
+                  <section class="tmux-panel">
+                    <div class="tmux-panel-heading">
+                      <div>
+                        <p class="tmux-panel-eyebrow">Global Actions</p>
+                        <h2>Current terminal</h2>
+                      </div>
+                    </div>
+                    <div id="global-actions" class="tmux-action-grid"></div>
+                  </section>
+                  <section class="tmux-panel tmux-panel-wide">
+                    <div class="tmux-panel-heading">
+                      <div>
+                        <p class="tmux-panel-eyebrow">Power User</p>
+                        <h2>Advanced tmux command</h2>
+                      </div>
+                    </div>
+                    <form id="command-form" class="tmux-command-form">
+                      <input
+                        id="command-input"
+                        type="text"
+                        placeholder="Example: set-option -g mouse on"
+                        spellcheck="false"
+                      />
+                      <button class="tmux-button tmux-button-primary" type="submit">Run</button>
+                    </form>
+                    <p class="tmux-command-help">
+                      Enter a raw tmux subcommand. The server will run it as <code>tmux ...</code>.
+                    </p>
+                  </section>
+                  <section class="tmux-panel tmux-panel-wide">
+                    <div class="tmux-panel-heading">
+                      <div>
+                        <p class="tmux-panel-eyebrow">Activity</p>
+                        <h2>Result stream</h2>
+                      </div>
+                    </div>
+                    <pre id="activity-log" class="tmux-activity-log">Waiting for tmux state...</pre>
+                  </section>
+                </div>
+              </section>
+            </section>
+          </main>
+          <div id="dialog-root"></div>
+        `;
+
+        const managerScript = document.createElement("script");
+        managerScript.src = "/assets/tmux-manager.js?v=tmux-state-25";
+        managerScript.onerror = () => {
+          const root = document.body.querySelector(".tmux-manager");
+          if (!root) {
+            return;
+          }
+          root.innerHTML = `
+            <section class="popup-demo-card" style="margin: 18px;">
+              <h2>Restart Required</h2>
+              <h1>Tmux manager assets are not loaded yet</h1>
+              <p>
+                The base module server is still running an older binary. Restart AT-Terminal so the
+                new tmux popup route and API endpoints are available, then open the manager again.
+              </p>
+              <div class="popup-demo-actions" style="margin-top: 14px;">
+                <button id="close-button" class="primary" type="button">Close popup</button>
+              </div>
+            </section>
+          `;
+          const closeButton = document.getElementById("close-button");
+          if (closeButton) {
+            closeButton.addEventListener("click", closePopup);
+          }
+        };
+        const actionsScript = document.createElement("script");
+        actionsScript.src = "/assets/tmux-actions.js?v=tmux-state-25";
+        actionsScript.onerror = managerScript.onerror;
+        actionsScript.onload = () => {
+          document.body.appendChild(managerScript);
+        };
+        document.body.appendChild(actionsScript);
+      }
+
+      if (popupKind === "tmux-manager") {
+        renderTmuxManagerShell();
+      } else {
+        renderDefaultPopup();
+      }
+    </script>
+  </body>
+</html>

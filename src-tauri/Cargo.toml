@@ -1,0 +1,36 @@
+[package]
+name = "at-terminal"
+version = "0.1.0"
+description = "AT Terminal Scaffold"
+authors = ["Rushikesh Vemuru"]
+edition = "2021"
+rust-version = "1.77"
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[dependencies]
+tauri = { version = "2.11.2", features = ["unstable"] }
+tauri-plugin-shell = "2.3.5"
+tauri-plugin-dialog = "2.7.1"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+home = "0.5"
+anyhow = "1.0"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1.0", features = ["full"] }
+tokio-util = { version = "0.7", features = ["rt"] }
+portable-pty = "0.8"
+thiserror = "1.0"
+libc = "0.2"
+log = "0.4"
+env_logger = "0.10"
+notify = "6.1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+keyring = "3"
+base64 = "0.22"
+url = "2"
+
+[features]
+default = []

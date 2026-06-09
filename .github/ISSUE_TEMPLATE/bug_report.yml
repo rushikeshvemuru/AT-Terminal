@@ -1,0 +1,89 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in AT Terminal.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Please fill out the form below.
+        **Do not report security vulnerabilities here** — see [SECURITY.md](../../blob/main/SECURITY.md) for private disclosure.
+
+  - type: input
+    id: app-version
+    attributes:
+      label: AT Terminal version (or commit SHA)
+      placeholder: "e.g. v0.1.0-beta.3 or commit a1b2c3d"
+      validations:
+        required: true
+
+  - type: dropdown
+    id: install-method
+    attributes:
+      label: How did you install AT Terminal?
+      options:
+        - .deb / .rpm / .AppImage installer
+        - macOS .dmg
+        - Windows .msi / .exe
+        - Homebrew (brew install ...)
+        - AUR package
+        - cargo install --git ...
+        - Built from source (pnpm tauri dev/build)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS 15 (Sequoia)
+        - macOS 14 (Sonoma)
+        - Windows 11
+        - Windows 10
+        - Ubuntu 24.04
+        - Ubuntu 22.04
+        - Fedora (latest)
+        - Arch Linux
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, numbered steps. Include any commands, files, or settings touched.
+      placeholder: |
+        1. Open AT Terminal
+        2. Create a new file in the editor
+        3. ...
+      validations:
+        required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected vs. actual behavior
+      placeholder: |
+        Expected: ...
+        Actual: ...
+      validations:
+        required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots, logs, or stack traces
+      description: Paste console output, terminal logs, or attach images. On Linux, `journalctl` or the in-app log panel helps.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: reproducible
+    attributes:
+      label: Reproducibility
+      options:
+        - label: This issue reproduces 100% of the time on the steps above
+          required: true
+        - label: I have reproduced this on the latest main / pre-release build

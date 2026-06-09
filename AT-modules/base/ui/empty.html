@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/assets/base.css" />
+    <title>Empty Panel</title>
+  </head>
+  <body>
+    <main id="root" class="panel-root empty-panel"></main>
+    <script>
+      const root = document.getElementById("root");
+      const params = new URLSearchParams(window.location.search);
+      const panelId = params.get("panelId");
+      const requestId = `panel-types-${Date.now()}`;
+
+      function requestPanelTypes() {
+        window.parent.postMessage(
+          {
+            type: "at.listPanelTypes",
+            requestId,
+            panelId,
+          },
+          "*",
+        );
+      }
+
+      function render(panelTypes) {
+        const menu = document.createElement("div");
+        menu.className = "empty-menu";
+
+        if (!panelTypes.length) {
+          const empty = document.createElement("div");
+          empty.className = "empty-state";
+          empty.textContent = "No module panels available";
+          menu.appendChild(empty);
+        }
+
+        for (const entry of panelTypes) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.textContent = `Change to ${entry.displayName}`;
+          button.addEventListener("click", () => {
+            window.parent.postMessage(
+              {
+                type: "at.changePanelType",
+                panelId,
+                panelType: entry.type,
+              },
+              "*",
+            );
+          });
+          menu.appendChild(button);
+        }
+
+        menu.appendChild(document.createElement("div")).className = "empty-divider";
+
+        const caption = document.createElement("div");
+        caption.className = "empty-caption";
+        caption.textContent = "Popup demo";
+        menu.appendChild(caption);
+
+        const popupButton = document.createElement("button");
+        popupButton.type = "button";
+        popupButton.textContent = "Open module popup";
+        popupButton.addEventListener("click", () => {
+          window.parent.postMessage(
+            {
+              type: "at.panelPopup.open",
+              panelId,
+              route: "/panels/popup-demo",
+              title: "Base Module Popup",
+              width: 680,
+              height: 440,
+            },
+            "*",
+          );
+        });
+        menu.appendChild(popupButton);
+
+        root.replaceChildren(menu);
+      }
+
+      window.addEventListener("message", (event) => {
+        if (
+          event.data &&
+          event.data.type === "at.panelTypes" &&
+          event.data.requestId === requestId
+        ) {
+          render(event.data.panelTypes || []);
+        }
+      });
+
+      requestPanelTypes();
+      render([]);
+    </script>
+  </body>
+</html>

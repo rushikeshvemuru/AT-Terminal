@@ -1,0 +1,1211 @@
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #09090b;
+  color: #d4d4d8;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.panel-root {
+  width: 100%;
+  height: 100%;
+  background: #09090b;
+}
+
+.empty-panel {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #27272a;
+}
+
+.empty-menu {
+  min-width: 180px;
+  border: 1px solid #27272a;
+  background: #18181b;
+  padding: 4px;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 40%);
+}
+
+.empty-menu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #d4d4d8;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+  padding: 7px 9px;
+  text-align: left;
+}
+
+.empty-menu button:hover {
+  background: #27272a;
+  color: #fafafa;
+}
+
+.empty-menu .empty-state {
+  color: #71717a;
+  font-size: 12px;
+  padding: 7px 9px;
+}
+
+.empty-menu .empty-divider {
+  height: 1px;
+  margin: 4px 0;
+  background: #27272a;
+}
+
+.empty-menu .empty-caption {
+  color: #71717a;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding: 7px 9px 5px;
+  text-transform: uppercase;
+}
+
+.terminal-frame {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #27272a;
+}
+
+.terminal-shell {
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+}
+
+.terminal-pane {
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+}
+
+#terminal {
+  width: 100%;
+  height: 100%;
+}
+
+.popup-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top right, rgb(16 185 129 / 16%), transparent 36%),
+    linear-gradient(180deg, #111827, #09090b 62%);
+}
+
+.popup-demo-card {
+  border: 1px solid rgb(63 63 70 / 0.9);
+  border-radius: 14px;
+  background: rgb(17 24 39 / 0.88);
+  padding: 18px;
+  box-shadow: 0 24px 60px rgb(0 0 0 / 40%);
+}
+
+.popup-demo h1,
+.popup-demo h2,
+.popup-demo p {
+  margin: 0;
+}
+
+.popup-demo h1 {
+  font-size: 18px;
+  color: #f4f4f5;
+}
+
+.popup-demo h2 {
+  font-size: 12px;
+  color: #a1a1aa;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.popup-demo p {
+  color: #d4d4d8;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.popup-demo code {
+  color: #86efac;
+}
+
+.popup-demo-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.popup-demo button {
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12px;
+  padding: 9px 14px;
+}
+
+.popup-demo button.primary {
+  background: #10b981;
+  color: #052e16;
+}
+
+.popup-demo button.secondary {
+  background: #27272a;
+  color: #e4e4e7;
+}
+
+/* ─── Tmux Manager ──────────────────────────────────────────────── */
+
+.tmux-manager {
+  --tmux-font-ui: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --tmux-font-mono: "IBM Plex Mono", "Fira Code", Menlo, Monaco, "Courier New", monospace;
+  --tmux-font-size-xs: 10px;
+  --tmux-font-size-sm: 12px;
+  --tmux-font-size-base: 13px;
+  --tmux-font-size-md: 14px;
+  --tmux-font-size-lg: 16px;
+  --tmux-font-size-xl: 20px;
+
+  /* Surfaces */
+  --tmux-bg: #050506;
+  --tmux-surface: #09090b;
+  --tmux-surface-raised: #111113;
+  --tmux-surface-overlay: #18181b;
+
+  /* Borders */
+  --tmux-border: rgb(63 63 70 / 0.72);
+  --tmux-border-subtle: rgb(63 63 70 / 0.34);
+  --tmux-border-focus: rgb(82 82 91 / 0.95);
+
+  /* Text */
+  --tmux-text-primary: #e4e4e7;
+  --tmux-text-secondary: #a1a1aa;
+  --tmux-text-tertiary: #71717a;
+
+  /* Accent */
+  --tmux-accent: #60a5fa;
+  --tmux-accent-muted: rgb(96 165 250 / 0.14);
+  --tmux-accent-hover: #93c5fd;
+
+  /* Status */
+  --tmux-status-ok: #34d399;
+  --tmux-status-ok-bg: rgb(16 185 129 / 0.12);
+  --tmux-status-ok-border: rgb(52 211 153 / 0.3);
+  --tmux-status-warn: #fbbf24;
+  --tmux-status-warn-bg: rgb(251 191 36 / 0.1);
+  --tmux-status-warn-border: rgb(251 191 36 / 0.25);
+  --tmux-status-error: #f87171;
+  --tmux-status-error-bg: rgb(248 113 113 / 0.1);
+  --tmux-status-error-border: rgb(248 113 113 / 0.3);
+
+  /* Danger */
+  --tmux-danger: #fb7185;
+  --tmux-danger-bg: rgb(251 113 133 / 0.12);
+  --tmux-danger-border: rgb(251 113 133 / 0.35);
+
+  /* Tree */
+  --tmux-tree-guide: rgb(82 82 91 / 0.34);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--tmux-bg);
+  color: var(--tmux-text-primary);
+}
+
+/* ─── Top bar ───────────────────────────────────────────────────── */
+
+.tmux-manager-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--tmux-border);
+  padding: 10px 12px;
+  background: #030304;
+}
+
+.tmux-manager-brand h1,
+.tmux-panel-heading h2 {
+  margin: 0;
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-lg);
+  font-weight: 600;
+  color: var(--tmux-text-primary);
+}
+
+.tmux-manager-brand {
+  min-width: 132px;
+}
+
+.tmux-manager-eyebrow,
+.tmux-panel-eyebrow,
+.tmux-sidebar-title {
+  margin: 0;
+  font-family: var(--tmux-font-ui);
+  color: var(--tmux-text-tertiary);
+  font-size: var(--tmux-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tmux-manager-subtitle,
+.tmux-command-help,
+.tmux-sidebar-meta {
+  margin: 2px 0 0;
+  font-family: var(--tmux-font-ui);
+  color: var(--tmux-text-secondary);
+  font-size: var(--tmux-font-size-xs);
+  line-height: 1.5;
+}
+
+/* ─── Search & controls ────────────────────────────────────────── */
+
+.tmux-manager-controls {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tmux-manager-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--tmux-text-tertiary);
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tmux-manager-search input,
+.tmux-command-form input,
+.tmux-dialog-input {
+  border: 1px solid var(--tmux-border);
+  border-radius: 8px;
+  background: var(--tmux-surface);
+  color: var(--tmux-text-primary);
+  font-family: var(--tmux-font-mono);
+  font-size: var(--tmux-font-size-sm);
+  min-width: 250px;
+  height: 30px;
+  padding: 7px 10px;
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.tmux-manager-search input:focus,
+.tmux-command-form input:focus,
+.tmux-dialog-input:focus {
+  outline: 2px solid var(--tmux-accent);
+  outline-offset: 1px;
+  border-color: var(--tmux-border-focus);
+}
+
+/* ─── Body layout ───────────────────────────────────────────────── */
+
+.tmux-manager-body {
+  display: grid;
+  grid-template-columns: minmax(260px, 340px) minmax(0, 1fr);
+  gap: 10px;
+  min-height: 0;
+  flex: 1;
+  padding: 10px;
+}
+
+/* ─── Sidebar ───────────────────────────────────────────────────── */
+
+.tmux-sidebar,
+.tmux-panel {
+  min-height: 0;
+  border: 1px solid var(--tmux-border);
+  border-radius: 8px;
+  background: var(--tmux-surface);
+}
+
+.tmux-sidebar {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tmux-sidebar-header,
+.tmux-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--tmux-border-subtle);
+}
+
+.tmux-sidebar-title {
+  font-weight: 600;
+}
+
+.tmux-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  min-height: 0;
+}
+
+.tmux-main-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+/* ─── Panel ─────────────────────────────────────────────────────── */
+
+.tmux-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.tmux-selection-panel {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  overflow: auto;
+}
+
+.tmux-command-panel,
+.tmux-activity-panel {
+  flex: 0 0 auto;
+}
+
+.tmux-command-heading {
+  align-items: center;
+}
+
+.tmux-panel-wide {
+  grid-column: 1 / -1;
+}
+
+.tmux-panel-heading h2 {
+  font-family: var(--tmux-font-ui);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--tmux-text-primary);
+}
+
+/* ─── Tree ──────────────────────────────────────────────────────── */
+
+.tmux-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 8px;
+  scrollbar-color: #27272a transparent;
+  scrollbar-width: thin;
+}
+
+.tmux-tree-section,
+.tmux-tree-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.tmux-tree-section-child {
+  margin-left: 8px;
+  position: relative;
+}
+
+.tmux-tree-section-child::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--tmux-tree-guide);
+}
+
+.tmux-tree-row-child {
+  margin-left: 12px;
+  position: relative;
+}
+
+.tmux-tree-row-child::before {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--tmux-tree-guide);
+}
+
+.tmux-tree-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: var(--tmux-text-primary);
+  cursor: pointer;
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-sm);
+  font-weight: 500;
+  min-height: 30px;
+  padding: 5px 8px;
+  text-align: left;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.tmux-tree-row:hover {
+  border-color: var(--tmux-border-subtle);
+  background: var(--tmux-surface-raised);
+}
+
+.tmux-tree-row:focus-visible {
+  outline: 2px solid var(--tmux-accent);
+  outline-offset: 2px;
+}
+
+.tmux-tree-row-selected {
+  border-color: rgb(82 82 91 / 0.95);
+  background: #18181b;
+}
+
+.tmux-tree-row-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tmux-tree-row-badges,
+.tmux-action-grid {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* ─── Status chips & badges ──────────────────────────────────────── */
+
+.tmux-inline-badge,
+.tmux-selection-badge,
+.tmux-status-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--tmux-border);
+  border-radius: 999px;
+  background: var(--tmux-surface-raised);
+  color: var(--tmux-text-secondary);
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.tmux-inline-badge-ok,
+.tmux-status-chip-ok {
+  border-color: var(--tmux-status-ok-border);
+  background: var(--tmux-status-ok-bg);
+  color: var(--tmux-status-ok);
+}
+
+.tmux-inline-badge-danger,
+.tmux-status-chip-error {
+  border-color: var(--tmux-status-error-border);
+  background: var(--tmux-status-error-bg);
+  color: var(--tmux-status-error);
+}
+
+.tmux-status-chip-warn {
+  border-color: var(--tmux-status-warn-border);
+  background: var(--tmux-status-warn-bg);
+  color: var(--tmux-status-warn);
+}
+
+/* ─── Selection detail ──────────────────────────────────────────── */
+
+.tmux-meta-list {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  animation: tmux-content-fade 180ms ease-out;
+}
+
+.tmux-meta-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--tmux-border-subtle);
+  padding-bottom: 8px;
+}
+
+.tmux-meta-key {
+  font-family: var(--tmux-font-ui);
+  color: var(--tmux-text-tertiary);
+  font-size: var(--tmux-font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.tmux-meta-value {
+  font-family: var(--tmux-font-mono);
+  color: var(--tmux-text-primary);
+  font-size: var(--tmux-font-size-sm);
+  text-align: right;
+  word-break: break-word;
+}
+
+/* ─── Action grid ───────────────────────────────────────────────── */
+
+.tmux-action-grid,
+.tmux-command-form,
+.tmux-activity-log {
+  padding: 12px;
+}
+
+.tmux-action-grid {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  animation: tmux-content-fade 180ms ease-out;
+}
+
+.tmux-selection-actions {
+  border-bottom: 1px solid var(--tmux-border-subtle);
+}
+
+.tmux-global-actions {
+  padding: 0;
+}
+
+/* ─── Command form ──────────────────────────────────────────────── */
+
+.tmux-command-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+}
+
+.tmux-command-form input {
+  min-width: 0;
+}
+
+.tmux-command-help {
+  max-width: 420px;
+  margin: 0;
+  text-align: right;
+}
+
+.tmux-command-help code {
+  font-family: var(--tmux-font-mono);
+  color: var(--tmux-accent);
+}
+
+/* ─── Buttons ────────────────────────────────────────────────────── */
+
+.tmux-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--tmux-border);
+  border-radius: 6px;
+  background: var(--tmux-surface-raised);
+  color: var(--tmux-text-primary);
+  cursor: pointer;
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-sm);
+  font-weight: 500;
+  letter-spacing: 0;
+  min-height: 30px;
+  padding: 6px 11px;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.tmux-button:hover:not(:disabled) {
+  background: var(--tmux-surface-overlay);
+  border-color: rgb(82 82 91 / 0.95);
+  box-shadow: 0 0 0 1px rgb(39 39 42 / 0.9);
+}
+
+.tmux-button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.tmux-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.tmux-button:focus-visible {
+  outline: 2px solid var(--tmux-accent);
+  outline-offset: 2px;
+}
+
+.tmux-button-primary {
+  background: #1f2937;
+  border-color: #3f3f46;
+  color: #f4f4f5;
+}
+
+.tmux-button-primary:hover:not(:disabled) {
+  background: #27272a;
+  border-color: #52525b;
+}
+
+.tmux-button-danger {
+  background: var(--tmux-danger-bg);
+  border-color: var(--tmux-danger-border);
+  color: var(--tmux-danger);
+}
+
+.tmux-button-danger:hover:not(:disabled) {
+  background: rgb(251 113 133 / 0.2);
+  border-color: rgb(251 113 133 / 0.5);
+}
+
+.tmux-button-ghost {
+  background: transparent;
+}
+
+/* ─── Empty state ────────────────────────────────────────────────── */
+
+.tmux-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 36px 20px;
+  text-align: center;
+  color: var(--tmux-text-tertiary);
+  border: 1px dashed var(--tmux-border-subtle);
+  border-radius: 8px;
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-sm);
+  line-height: 1.65;
+}
+
+/* ─── Activity log ───────────────────────────────────────────────── */
+
+.tmux-activity-log {
+  min-height: 96px;
+  max-height: 180px;
+  overflow-y: auto;
+  color: var(--tmux-text-secondary);
+  font-family: var(--tmux-font-mono);
+  font-size: var(--tmux-font-size-xs);
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.tmux-disclosure {
+  border-top: 1px solid var(--tmux-border-subtle);
+}
+
+.tmux-disclosure summary {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--tmux-text-secondary);
+  cursor: pointer;
+  font-family: var(--tmux-font-ui);
+  font-size: var(--tmux-font-size-sm);
+  font-weight: 600;
+  padding: 0 12px;
+}
+
+.tmux-disclosure summary:hover {
+  background: var(--tmux-surface-raised);
+  color: var(--tmux-text-primary);
+}
+
+.tmux-disclosure summary:focus-visible {
+  outline: 2px solid var(--tmux-accent);
+  outline-offset: -2px;
+}
+
+/* ─── Dialog ─────────────────────────────────────────────────────── */
+
+.tmux-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(0 0 0 / 0.84);
+  backdrop-filter: blur(4px);
+  padding: 18px;
+  animation: tmux-overlay-enter 150ms ease-out;
+}
+
+@keyframes tmux-overlay-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tmux-dialog {
+  width: min(420px, 100%);
+  border: 1px solid rgb(82 82 91 / 0.72);
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgb(24 24 27 / 0.96), rgb(9 9 11 / 0.98));
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.03),
+    0 20px 54px rgb(0 0 0 / 0.62);
+  padding: 14px;
+  animation: tmux-dialog-enter 200ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes tmux-dialog-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.tmux-dialog h3,
+.tmux-dialog p {
+  margin: 0;
+}
+
+.tmux-dialog h3 {
+  font-family: var(--tmux-font-ui);
+  color: var(--tmux-text-primary);
+  font-size: var(--tmux-font-size-lg);
+  font-weight: 600;
+}
+
+.tmux-dialog p {
+  font-family: var(--tmux-font-ui);
+  color: var(--tmux-text-secondary);
+  font-size: var(--tmux-font-size-sm);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+.tmux-dialog-input {
+  width: 100%;
+  min-width: 0;
+  margin-top: 12px;
+  background: rgb(5 5 6 / 0.92);
+}
+
+.tmux-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* ─── Pinned tmux panel ──────────────────────────────────────────── */
+
+.tmux-pinned {
+  position: relative;
+  display: flex;
+  width: var(--tmux-pinned-width, clamp(260px, 24vw, 360px));
+  min-width: 260px;
+  max-width: min(560px, 50vw);
+  height: 100%;
+  min-height: 0;
+  flex: 0 0 var(--tmux-pinned-width, clamp(260px, 24vw, 360px));
+  flex-direction: column;
+  overflow: hidden;
+  border-right: 1px solid #18181b;
+  background: #000;
+  color: #d4d4d8;
+  font-family:
+    "Inter",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+
+.tmux-pinned[hidden] {
+  display: none;
+}
+
+.tmux-pinned-collapsed {
+  width: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  --tmux-pinned-width: 36px;
+  flex-basis: 36px;
+}
+
+.tmux-pinned-resize-handle {
+  position: absolute;
+  top: 0;
+  right: -2px;
+  z-index: 4;
+  width: 5px;
+  height: 100%;
+  cursor: col-resize;
+}
+
+.tmux-pinned-resize-handle::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 2px;
+  width: 1px;
+  height: 100%;
+  background: transparent;
+  transition: background 120ms ease;
+}
+
+.tmux-pinned-resize-handle:hover::before,
+.tmux-pinned-resizing .tmux-pinned-resize-handle::before {
+  background: #71717a;
+}
+
+.tmux-pinned-header {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #18181b;
+  background: #000;
+  padding: 7px 9px 7px 11px;
+}
+
+.tmux-pinned-title-wrap {
+  min-width: 0;
+  flex: 1;
+}
+
+.tmux-pinned-title {
+  color: #e4e4e7;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.tmux-pinned-summary {
+  overflow: hidden;
+  color: #71717a;
+  font-size: 10px;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tmux-pinned-controls {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 3px;
+}
+
+.tmux-pinned-icon-button {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #27272a;
+  border-radius: 4px;
+  background: #09090b;
+  color: #a1a1aa;
+  cursor: pointer;
+  font: inherit;
+  font-size: 10px;
+  line-height: 1;
+  padding: 0;
+}
+
+.tmux-pinned-icon-button:hover {
+  border-color: #3f3f46;
+  background: #18181b;
+  color: #f4f4f5;
+}
+
+.tmux-pinned-status {
+  flex: 0 0 auto;
+  border-bottom: 1px solid #18181b;
+  background: #000;
+  color: #a1a1aa;
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  line-height: 1.35;
+  padding: 7px 11px;
+}
+
+.tmux-pinned-status-ok {
+  color: #4ade80;
+}
+
+.tmux-pinned-status-warn {
+  color: #fbbf24;
+}
+
+.tmux-pinned-status-error {
+  color: #fb7185;
+}
+
+.tmux-pinned-tree {
+  min-height: 0;
+  flex: 1 1 auto;
+  overflow: auto;
+  background: #000;
+  padding: 7px 7px 12px;
+  scrollbar-color: #27272a transparent;
+  scrollbar-width: thin;
+}
+
+.tmux-pinned-group {
+  min-width: 0;
+}
+
+.tmux-pinned-nested {
+  margin-left: 13px;
+  border-left: 1px solid #27272a;
+  padding-left: 5px;
+}
+
+.tmux-pinned-row {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: 14px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #d4d4d8;
+  cursor: default;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.25;
+  margin: 1px 0;
+  padding: 4px 6px;
+  position: relative;
+  text-align: left;
+}
+
+.tmux-pinned-row:hover {
+  background: #18181b;
+  color: #fafafa;
+}
+
+.tmux-pinned-row-selected {
+  background: #27272a;
+  color: #fafafa;
+}
+
+.tmux-pinned-row-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 2px;
+  border-radius: 999px;
+  background: #a1a1aa;
+}
+
+.tmux-pinned-row-active .tmux-pinned-row-label::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+  vertical-align: 1px;
+}
+
+.tmux-pinned-row-toggle {
+  width: 14px;
+  color: #71717a;
+  cursor: pointer;
+  font-size: 11px;
+  text-align: center;
+}
+
+.tmux-pinned-row-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tmux-pinned-row-meta {
+  max-width: 92px;
+  overflow: hidden;
+  color: #71717a;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tmux-pinned-pane-row {
+  color: #a1a1aa;
+}
+
+.tmux-pinned-empty {
+  color: #71717a;
+  font-size: 11px;
+  padding: 10px 8px;
+}
+
+.tmux-pinned-context-menu {
+  position: absolute;
+  z-index: 1000;
+  width: 178px;
+  border: 1px solid var(--tmux-border);
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgb(24 24 27 / 0.98), rgb(9 9 11 / 0.98));
+  box-shadow:
+    0 0 0 1px rgb(255 255 255 / 0.025),
+    0 18px 50px rgb(0 0 0 / 0.55);
+  padding: 4px;
+}
+
+.tmux-pinned-context-menu button {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 4px;
+  background: transparent;
+  color: #d4d4d8;
+  cursor: pointer;
+  font: inherit;
+  font-size: 11px;
+  line-height: 1.2;
+  padding: 7px 8px;
+  text-align: left;
+}
+
+.tmux-pinned-context-menu button:hover {
+  background: #27272a;
+  color: #fafafa;
+}
+
+.tmux-pinned-context-menu .tmux-pinned-menu-danger {
+  color: #fb7185;
+}
+
+.tmux-pinned-collapsed .tmux-pinned-title-wrap,
+.tmux-pinned-collapsed .tmux-pinned-status,
+.tmux-pinned-collapsed .tmux-pinned-tree,
+.tmux-pinned-collapsed .tmux-pinned-icon-button:first-child,
+.tmux-pinned-collapsed .tmux-pinned-icon-button:last-child {
+  display: none;
+}
+
+.tmux-pinned-collapsed .tmux-pinned-header {
+  justify-content: center;
+  padding: 6px;
+}
+
+.tmux-pinned-collapsed .tmux-pinned-controls {
+  justify-content: center;
+}
+
+/* ─── Content fade animation ─────────────────────────────────────── */
+
+@keyframes tmux-content-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────── */
+
+@media (max-width: 980px) {
+  .tmux-manager-body {
+    grid-template-columns: 1fr;
+  }
+
+  .tmux-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tmux-manager-topbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .tmux-manager-controls {
+    justify-content: flex-start;
+  }
+
+  .tmux-manager-search input,
+  .tmux-command-form input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .tmux-command-heading {
+    align-items: flex-start;
+  }
+
+  .tmux-command-help {
+    max-width: none;
+    text-align: left;
+  }
+
+  .tmux-command-form {
+    grid-template-columns: 1fr;
+  }
+}

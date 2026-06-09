@@ -1,0 +1,72 @@
+name: Feature Request
+description: Suggest an improvement or new capability for AT Terminal.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to propose a new feature. For bug reports, use the **Bug Report** template.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or use case
+      description: What are you trying to do? Why is the current behavior limiting?
+      placeholder: "When I try to ... I need AT Terminal to ..."
+      validations:
+        required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior or UI you'd like to see. Mockups or references are welcome.
+      validations:
+        required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches you've thought about, and why this one is preferable.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: areas
+    attributes:
+      label: Which area(s) of AT Terminal does this affect?
+      options:
+        - label: Terminal (xterm.js, PTY, tmux integration)
+        - label: Editor (Monaco, tabs, language support)
+        - label: File explorer
+        - label: Git panel
+        - label: AT-modules workspace
+        - label: Settings / preferences
+        - label: Other (describe above)
+      validations:
+        required: true
+
+  - type: checkboxes
+    id: platforms
+    attributes:
+      label: Platform relevance
+      description: Where should this work? Pick all that apply.
+      options:
+        - label: macOS
+        - label: Windows
+        - label: Linux
+        - label: All platforms (no platform-specific behavior)
+      validations:
+        required: true
+
+  - type: dropdown
+    id: pr-willingness
+    attributes:
+      label: Would you be willing to submit a PR?
+      options:
+        - Yes, I'd like to implement this
+        - Yes, with guidance from a maintainer
+        - No, but I'm happy to test
+        - No

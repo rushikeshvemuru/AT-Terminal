@@ -1,0 +1,47 @@
+{
+  "productName": "AT Terminal",
+  "version": "0.1.0",
+  "identifier": "com.at.terminal",
+  "build": {
+    "runner": "../scripts/tauri-cargo-runner.sh",
+    "beforeDevCommand": "npm run dev -- --host 127.0.0.1",
+    "devUrl": "http://127.0.0.1:5173",
+    "beforeBuildCommand": "npm run prepare-tauri-bundle",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "AT-Terminal",
+        "width": 800,
+        "height": 600,
+        "decorations": false
+      }
+    ],
+    "security": {
+      "csp": {
+        "default-src": "'self' customprotocol: asset:",
+        "connect-src": "'self' ipc: http://ipc.localhost http://127.0.0.1:* ws://127.0.0.1:* http://localhost:5173 ws://localhost:5173",
+        "frame-src": "'self' http://127.0.0.1:* https:",
+        "img-src": "'self' asset: http://asset.localhost http://127.0.0.1:* data: blob:",
+        "font-src": "'self' data:",
+        "style-src": "'self' 'unsafe-inline'",
+        "script-src": "'self' http://localhost:5173 http://127.0.0.1:5173"
+      }
+    }
+  },
+  "bundle": {
+    "active": true,
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "resources": {
+      "../AT-modules": "AT-modules"
+    },
+    "targets": "all"
+  }
+}

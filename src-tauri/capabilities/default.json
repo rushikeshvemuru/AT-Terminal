@@ -1,0 +1,16 @@
+{
+  "identifier": "default",
+  "description": "Default capabilities for the main window",
+  "webviews": ["main", "detached-tab-*"],
+  "permissions": [
+    "core:default",
+    "core:window:allow-close",
+    "core:window:allow-destroy",
+    "core:window:allow-minimize",
+    "core:window:allow-toggle-maximize",
+    "core:window:allow-start-dragging",
+    "core:window:allow-set-decorations",
+    "shell:allow-open",
+    "dialog:allow-open"
+  ]
+}
